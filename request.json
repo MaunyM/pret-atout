@@ -1,0 +1,7 @@
+{
+  "httpMethod": "POST",
+  "body":
+  {
+    "query":"{posts{id description}}"
+  }
+}
