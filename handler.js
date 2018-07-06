@@ -2,20 +2,17 @@
 const server = require("apollo-server-lambda");
 const schema = require('./schema');
 
-exports.graphql = server.graphqlLambda((event, context) => {
-    const headers = event.headers;
-    const functionName = context.functionName;
 
-    return {
-        schema: schema,
-        context: {
-            headers,
-            functionName,
-            event,
-            context
-        }
+exports.graphqlHandler = function(event, context, callback) {
+    const callbackFilter = function(error, output) {
+        output.headers['Access-Control-Allow-Origin'] = '*';
+        callback(error, output);
     };
-});
+    const handler = server.graphqlLambda({ schema: schema });
+
+    return handler(event, context, callbackFilter);
+};
+
 
 exports.graphiql = server.graphiqlLambda({
     endpointURL: '/dev/graphql'

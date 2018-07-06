@@ -9,7 +9,7 @@ provider:
 
 functions:
   graphql:
-    handler: handler.graphql
+    handler: handler.graphqlHandler
     events:
       - http:
           path: graphql
