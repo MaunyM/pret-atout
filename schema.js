@@ -1,31 +1,8 @@
-const makeExecutableSchema = require('graphql-tools').makeExecutableSchema;
+import { resolvers } from './resolver';
+import { makeExecutableSchema } from 'graphql-tools';
+import typeDefs from './schema.graphql'
 
-const typeDefs = `
-  type Post {
-    description: String!
-    id: ID! @isUnique
-    imageUrl: String!
-  }
-  type Query {
-    posts: [Post]
-  }
-`;
-
-/* Test data */
-const posts = [
-    { id: 1, imageUrl: 1, description: 'Introduction to GraphQL'},
-    { id: 2, imageUrl: 2, description: 'Welcome to Meteor'},
-    { id: 3, imageUrl: 2, description: 'Advanced GraphQL'},
-    { id: 4, imageUrl: 3, description: 'Launchpad is Cool'},
-];
-
-const resolvers = {
-    Query: {
-        posts: () => posts,
-    },
-};
-
-module.exports = makeExecutableSchema({
+export const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
 });

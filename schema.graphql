@@ -1,0 +1,29 @@
+  type User {
+    handle: ID!
+    name: String!
+    email: String!
+    password: String!
+  }
+  type AuthPayload {
+      token: String
+      user: User
+  }
+
+  type Bill {
+      handle: ID!
+      name: String!
+      description: String!
+      postedBy: User
+  }
+
+  type Query {
+      bills: [Bill]
+  }
+
+
+
+  type Mutation {
+      createBill(name: String!, description:String!): Bill!
+      signup(email: String!, password: String!, name: String!): AuthPayload
+      login(email: String!, password: String!): AuthPayload
+  }

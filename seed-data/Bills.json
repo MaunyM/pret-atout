@@ -1,0 +1,12 @@
+[
+  {
+    "handle": "hash1",
+    "name": "Facturation d'Azule",
+    "description" : "Super jeux, attention aux tricheurs"
+  },
+  {
+    "handle": "hash2",
+    "name": "Facturation d'exploding Kitten",
+    "description" : "Il faut tenter sa chance ! (Y'a deux extensions)"
+  }
+]
