@@ -1,0 +1,22 @@
+[
+  {
+    "handle": "user-1676d090-9bc8-11e8-be82-f3551bfe925e",
+    "target": "user-1676d090-9bc8-11e8-be82-f3551bfe925e",
+    "search": "matthieu@atout.fr",
+    "name": "Matthieu",
+    "password": "$2a$10$8XTOI8hgtsAIKpYbwXxHA.J5T7tD0Juv9bUNeYS4L4TXMwIM06R0W"
+  },
+  {
+    "handle": "user-1686d090-9bc8-11e8-be82-f3551bfe925e",
+    "target": "user-1686d090-9bc8-11e8-be82-f3551bfe925e",
+    "search": "nuf@atout.fr",
+    "name": "Celia",
+    "password": "$2a$10$8XTOI8hgtsAIKpYbwXxHA.J5T7tD0Juv9bUNeYS4L4TXMwIM06R0W"
+  },
+  {
+    "handle": "ludo-48607d30-b13b-11e8-898a-c1826b1a2e63",
+    "target": "box-62157fb0-ac99-11e8-8751-5bf1b80f4bd7",
+    "gameHandle": "7df25890-ac47-11e8-8751-5bf1b80f4bd7",
+    "name": "King of nuf"
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "handle": "7df25890-ac47-11e8-8751-5bf1b80f4bd7",
+    "name": "Azul",
+    "thumbnail": "https://cf.geekdo-images.com/thumb/img/_ed_JktpgFwTr2WjEQgYMzHBvOQ=/fit-in/200x150/pic3718275.jpg",
+    "maxPlayer": 4,
+    "minPlayer": 2,
+    "search": "azul",
+    "__typename": "Game"
+  },
+  {
+    "handle": "62157fb0-ac99-11e8-8751-5bf1b80f4bd7",
+    "name": "King of Tokyo",
+    "thumbnail": "https://cf.geekdo-images.com/thumb/img/iEQpTdf7xHrGznRhdNBMiKy_mIM=/fit-in/200x150/pic3043734.jpg",
+    "maxPlayer": 6,
+    "minPlayer": 2,
+    "search": "king of tokyo",
+    "__typename": "Game"
+  },
+  {
+    "handle": "9eae9920-ac94-11e8-8751-5bf1b80f4bd7",
+    "name": "Monopoly",
+    "thumbnail": "https://cf.geekdo-images.com/thumb/img/XDq3S7BWb25Q2Ekw2WyAg_f_C00=/fit-in/200x150/pic3640835.jpg",
+    "maxPlayer": 8,
+    "minPlayer": 2,
+    "search": "monopoly",
+    "__typename": "Game"
+  },
+  {
+    "handle": "445f3dd0-ace9-11e8-8751-5bf1b80f4bd7",
+    "name": "Identik",
+    "thumbnail": "https://cf.geekdo-images.com/thumb/img/1ENQiED3nyu0YkpvRnVQlVXKTDs=/fit-in/200x150/pic2631879.jpg",
+    "maxPlayer": 10,
+    "minPlayer": 3,
+    "search": "identik",
+    "__typename": "Game"
+  },
+  {
+    "handle": "67ddeb40-ac9d-11e8-8751-5bf1b80f4bd7",
+    "name": "Magic Maze",
+    "thumbnail": "https://cf.geekdo-images.com/thumb/img/QQmbriHVC3XKpxFeEx9vRHXptcs=/fit-in/200x150/pic3268473.jpg",
+    "maxPlayer": 8,
+    "minPlayer": 1,
+    "search": "magic maze",
+    "__typename": "Game"
+  }
+]

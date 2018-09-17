@@ -1,0 +1,31 @@
+.Game-create .ui.form .field.players .ui.input input {
+    width: 70px;
+}
+
+.Game-create .ui.form .field.players .ui.input {
+    margin: 0 .85714286em;
+}
+
+.Game .title {
+    text-transform: capitalize;
+}
+
+.Game .ui.image {
+    max-height: 100px;
+    max-width: 180px;
+}
+
+.Game .card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.Game .card-content .card-column {
+    display: flex;
+    flex-grow: 1;
+}
+
+.Game .card-content .info {
+    flex-grow: 1;
+}

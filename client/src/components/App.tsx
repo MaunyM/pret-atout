@@ -1,22 +1,29 @@
 import * as React from 'react';
-import {Route, Switch} from "react-router";
+import {Redirect, Route, Switch} from "react-router";
 
 import '../styles/App.css';
 
-import BillListComponent from "./BillList";
-import CreateBillComponent from "./CreateBill";
-import HeaderComponent from "./Header";
+import {readUserData} from "../service/user";
+import HomeComponent from "./Home";
+import LoginComponent from "./Login";
 
+import * as moment from 'moment';
+import 'moment/locale/fr';
+moment.locale('fr');
 
+const loginRender = (props: any) => (<LoginComponent login={true} {...props}/>);
+const signupRender = (props: any) => (<LoginComponent login={false} {...props}/>);
 
 class App extends React.Component {
     public render() {
+        const connected: boolean = readUserData() !== null;
         return (
-            <div className="App">
-                <HeaderComponent/>
+            <div className={'App'}>
                 <Switch>
-                    <Route exact={true} path="/" component={BillListComponent} />
-                    <Route exact={true} path="/create" component={CreateBillComponent} />
+                    {connected && <Route path="/home" component={HomeComponent}/>}
+                    <Route path="/signup" render={signupRender}/>
+                    {connected && <Redirect to="/home"/>}
+                    <Route path="/" render={loginRender}/>}
                 </Switch>
             </div>
         );

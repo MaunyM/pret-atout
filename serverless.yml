@@ -25,12 +25,16 @@ custom:
     seed:
       test:
         sources:
-          - table: Users_
-            sources: [seed-data/Users.json]
           - table: Bills
             sources: [seed-data/Bills.json]
+          - table: Games
+            sources: [seed-data/Games.json]
+          - table: Ludos
+            sources: [seed-data/Ludos.json]
 
 functions:
+  authorize:
+    handler: backend/authorize.handler
   graphql:
     handler: handler.graphqlHandler
     role: ServiceRole
@@ -39,6 +43,7 @@ functions:
           path: graphql
           method: post
           cors: true
+          authorizer: authorize
   graphiql:
     handler: handler.graphiql
     role: ServiceRole
@@ -51,21 +56,6 @@ functions:
 
 resources:
   Resources:
-    UserTable:
-      Type: 'AWS::DynamoDB::Table'
-      Properties:
-        KeySchema:
-          -
-            AttributeName: handle
-            KeyType: HASH
-        AttributeDefinitions:
-          -
-            AttributeName: handle
-            AttributeType: S
-        ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
-        TableName: 'Users_'
     BillTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
@@ -78,9 +68,66 @@ resources:
             AttributeName: handle
             AttributeType: S
         ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
         TableName: 'Bills'
+    GameTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        KeySchema:
+          -
+            AttributeName: handle
+            KeyType: HASH
+        AttributeDefinitions:
+          -
+            AttributeName: handle
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'Games'
+    LudoTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        KeySchema:
+          - AttributeName: handle
+            KeyType: HASH
+          - AttributeName: target
+            KeyType: RANGE
+        AttributeDefinitions:
+          - AttributeName: handle
+            AttributeType: S
+          - AttributeName: target
+            AttributeType: S
+          - AttributeName: edge
+            AttributeType: S
+          - AttributeName: search
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'Ludos'
+        GlobalSecondaryIndexes:
+          - IndexName: target-index
+            KeySchema:
+              - AttributeName: target
+                KeyType: HASH
+              - AttributeName: edge
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+          - IndexName: search-index
+            KeySchema:
+              - AttributeName: search
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
     ServiceRole:
       Type: "AWS::IAM::Role"
       Properties:
@@ -112,10 +159,12 @@ resources:
                     - "dynamodb:Scan"
                     - "dynamodb:UpdateItem"
                   Resource:
-                    - "arn:aws:dynamodb:eu-west-1:*:table/Users_"
-                    - "arn:aws:dynamodb:eu-west-1:*:table/Users_/*"
                     - "arn:aws:dynamodb:eu-west-1:*:table/Bills"
-                    - "arn:aws:dynamodb:eu-west-1:*:table/Bill/*"
+                    - "arn:aws:dynamodb:eu-west-1:*:table/Bills/*"
+                    - "arn:aws:dynamodb:eu-west-1:*:table/Games"
+                    - "arn:aws:dynamodb:eu-west-1:*:table/Games/*"
+                    - "arn:aws:dynamodb:eu-west-1:*:table/Ludos"
+                    - "arn:aws:dynamodb:eu-west-1:*:table/Ludos/*"
     XrayLambdaRolePolicy:
       Type: "AWS::IAM::Policy"
       Properties:

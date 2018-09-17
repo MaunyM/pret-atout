@@ -1,29 +1,83 @@
-  type User {
+type User {
     handle: ID!
     name: String!
     email: String!
     password: String!
-  }
-  type AuthPayload {
-      token: String
-      user: User
-  }
+    ludos: [Ludo]
+}
+type AuthPayload {
+    token: String
+    user: User
+}
 
-  type Bill {
-      handle: ID!
-      name: String!
-      description: String!
-      postedBy: User
-  }
+type Bill {
+    handle: ID!
+    name: String!
+    description: String!
+    postedBy: User
+}
 
-  type Query {
-      bills: [Bill]
-  }
+type Ludo {
+    handle: ID!
+    name: String!
+    edge: String
+    members: [User]
+    games: [Game]
+}
 
+type Box {
+    handle: ID!
+    game: Game
+    borrow: Borrow
+}
 
+type Game {
+    handle: ID!
+    name: String!
+    bggId: String
+    thumbnail: String
+    description: String
+    minPlayer: Int
+    maxPlayer: Int
+    postedBy: User
+}
 
-  type Mutation {
-      createBill(name: String!, description:String!): Bill!
-      signup(email: String!, password: String!, name: String!): AuthPayload
-      login(email: String!, password: String!): AuthPayload
-  }
+type Borrow {
+    start : Int
+    end : Int
+}
+
+input GameInput {
+    name: String!
+    bggId: String
+    thumbnail: String
+    description: String
+    minPlayer: Int
+    maxPlayer: Int
+    handle: String
+}
+
+input LudoInput {
+    name: String!
+}
+
+type Query {
+    searchGames(filter:String!):[Game]
+    ludo(handle:String!): Ludo
+    boxes(ludoHandle:String!): [Box]
+    ludos: [Ludo]
+    bills: [Bill]
+    games: [Game]
+    me: User
+}
+
+type Mutation {
+    createBill(name: String!, description:String!): Bill!
+    createGame(game: GameInput!): Game!
+    createLudo(ludo: LudoInput!): Ludo!
+    joinLudo(handle: String!): Ludo!
+    borrowBox(handle: String!): Borrow!
+    addGameToLudo(game: GameInput!, ludoHandle: String!): Box!
+    signup(email: String!, password: String!, name: String!): AuthPayload
+    login(email: String!, password: String!): AuthPayload
+}

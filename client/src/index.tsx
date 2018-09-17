@@ -1,5 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import {BrowserRouter} from "react-router-dom";
+
 import App from './components/App';
 import './styles/index.css';
 
@@ -7,26 +9,30 @@ import registerServiceWorker from './registerServiceWorker';
 
 import {InMemoryCache} from 'apollo-cache-inmemory'
 import {ApolloClient} from 'apollo-client'
+import {setContext} from 'apollo-link-context'
 import {createHttpLink} from 'apollo-link-http'
-import gql from 'graphql-tag';
 import {ApolloProvider} from 'react-apollo'
-import {BrowserRouter} from "react-router-dom";
+import {readUserData} from "./service/user";
+
 
 const httpLink = createHttpLink({
     uri: process.env.REACT_APP_GRAPHQL_ENDPOINT
 });
 
-const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: httpLink
+const authLink = setContext((_, {headers}) => {
+    const authorization = readUserData() || 'no-auth';
+    return {
+        headers: {
+            ...headers,
+            authorization
+        }
+    };
 });
 
-const variables = {
-    consumer_key: process.env.REACT_APP_CONSUMER_KEY,
-    consumer_secret: process.env.REACT_APP_SECRET_KEY,
-};
-// tslint:disable-next-line:no-console
-client.query({query: gql`{ users{name} }`, variables}).then(console.log);
+const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    link: authLink.concat(httpLink),
+});
 
 ReactDOM.render(
     <BrowserRouter>

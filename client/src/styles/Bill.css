@@ -1,0 +1,13 @@
+.Bill-list .content .ui.cards {
+    align-items: center;
+    flex-grow: 2;
+}
+
+.Bill-list .content{
+    display: flex;
+}
+
+.Bill-home .menu{
+    height: 142px;
+}
+
